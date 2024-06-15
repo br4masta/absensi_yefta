@@ -93,12 +93,8 @@
 
     $(document).on("change","#Jenis",function() {
         if($(this).val()!=0){
-            // $('.wrap-keterangan').removeClass('d-none')
-            // $('.btn-capture').addClass('d-none')
             $('#my_camera').addClass('d-none')
         }else{
-            // $('.wrap-keterangan').addClass('d-none')
-            // $('.btn-capture').removeClass('d-none')
             $('#my_camera').removeClass('d-none')
         }
             
