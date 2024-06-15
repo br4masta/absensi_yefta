@@ -14,7 +14,7 @@ class Jam extends CI_Controller
     public function index()
     {
         $data['jam'] = $this->jam->get_all();
-        return $this->template->load('template', 'jam', $data);
+        return $this->template->load('template', 'jamNew', $data);
     }
 
     public function update()
@@ -22,7 +22,7 @@ class Jam extends CI_Controller
         $post = $this->input->post();
         $data = [
             'start' => $post['start'],
-            'finish' => $post['finish']
+            // 'finish' => $post['finish']//comment brian tidak diperlukan
         ];
 
         $result = $this->jam->update_data($post['id_jam'], $data);

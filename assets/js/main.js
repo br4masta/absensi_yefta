@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    let sendAjax = function(url, formData, type = 'POST') {
+$(document).ready(function () {
+    let sendAjax = function (url, formData, type = 'POST') {
         let dataReturn = [];
         $.ajax({
             url: url,
@@ -38,12 +38,12 @@ $(document).ready(function() {
         let absenProperty = $.parseJSON(absenNeeded);
         swal({
             title: 'Yuk Absen!',
-			text: absenProperty.message,
+            text: absenProperty.message,
             icon: 'warning',
-            buttons:{
+            buttons: {
                 confirm: {
-                    text : 'Oke Absen',
-                    className : 'btn btn-success'
+                    text: 'Oke Absen',
+                    className: 'btn btn-success'
                 },
                 cancel: {
                     visible: true,
@@ -61,24 +61,25 @@ $(document).ready(function() {
         return false;
     }
 
-    $('.custom-file-input').change(function(e) {
+    $('.custom-file-input').change(function (e) {
         let filename = e.target.files[0].name;
         console.log($(this).closest('.custom-file-label'));
         $(this).next().text(filename);
         console.log(filename);
     });
 
-    $('.btn-edit-jam').click(function() {
+    $('.btn-edit-jam').click(function () {
         let dataEncode = atob($(this).attr('data-jam'));
         let dataJam = $.parseJSON(dataEncode);
-        
+
         $('#edit-keterangan').text(dataJam.keterangan);
+        $('.edit-keterangan').text(dataJam.keterangan);
         $('#edit-id-jam').val(dataJam.id_jam);
         $('#edit-start').val(dataJam.start);
         $('#edit-finish').val(dataJam.finish);
     });
 
-    $('#form-edit-jam').submit(function() {
+    $('#form-edit-jam').submit(function () {
         let form = document.getElementById('form-edit-jam');
         let url = $(this).attr('action');
         let data = new FormData(form);
@@ -92,7 +93,7 @@ $(document).ready(function() {
         $('#edit-jam').modal('hide');
     });
 
-    $('#form-add-divisi').submit(function() {
+    $('#form-add-divisi').submit(function () {
         let form = document.getElementById('form-add-divisi');
         let url = $(this).attr('action');
         let data = new FormData(form);
@@ -114,7 +115,7 @@ $(document).ready(function() {
         $('#modal-add-divisi').modal('hide');
     });
 
-    $('body').on('click', '.btn-edit-divisi', function() {
+    $('body').on('click', '.btn-edit-divisi', function () {
         let dataEncode = atob($(this).attr('data-divisi'));
         console.log($(this).attr('data-divisi'));
         console.log(dataEncode);
@@ -124,7 +125,7 @@ $(document).ready(function() {
         $('#edit-nama-divisi').val(dataDivisi.nama_divisi);
     });
 
-    $('#form-edit-divisi').submit(function() {
+    $('#form-edit-divisi').submit(function () {
         let form = document.getElementById('form-edit-divisi');
         let url = $(this).attr('action');
         let data = new FormData(form);
@@ -136,17 +137,17 @@ $(document).ready(function() {
         $('#modal-edit-divisi').modal('hide');
     });
 
-    $('body').on('click', '.btn-delete', function() {
+    $('body').on('click', '.btn-delete', function () {
         let destionation = $(this).attr('href');
-        
+
         swal({
             title: 'Yakin Hapus?',
-			text: "Data yang dihapus akan hilang permanen!",
+            text: "Data yang dihapus akan hilang permanen!",
             icon: 'warning',
-            buttons:{
+            buttons: {
                 confirm: {
-                    text : 'Ya Hapus!',
-                    className : 'btn btn-danger'
+                    text: 'Ya Hapus!',
+                    className: 'btn btn-danger'
                 },
                 cancel: {
                     visible: true,

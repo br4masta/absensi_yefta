@@ -16,6 +16,53 @@ function check_absen_harian()
     }
 }
 
+function check_jamNew($jam, $status, $raw = false)
+{
+    if ($jam) {
+        $status = ucfirst($status);
+        $CI =& get_instance();
+        $CI->load->model('Jam_model', 'jam');
+        $jam_kerja = $CI->jam->db->where('keterangan', $status)->get('jam')->row();
+
+        if ($status == 'Masuk' && $jam > $jam_kerja->finish) {
+            if ($raw) {
+                return [
+                    'status' => 'telat',
+                    'text' => $jam
+                ];
+            } else {
+                return '<span class="badge badge-danger">' . $jam . '</span>';
+            }
+        } elseif ($status == 'Pulang' && $jam > $jam_kerja->finish) {
+            if ($raw) {
+                return [
+                    'status' => 'lembur',
+                    'text' => $jam
+                ];
+            } else {
+                return '<span class="badge badge-success">' . $jam . '</span>';
+            }
+        } else {
+            if ($raw) {
+                return [
+                    'status' => 'normal',
+                    'text' => $jam
+                ];
+            } else {
+                return '<span class="badge badge-primary">' . $jam . '</span>';
+            }
+        }
+    } else {
+        if ($raw) {
+            return [
+                'status' => 'normal',
+                'text' => '-'
+            ];
+        }
+        return '-';
+    }
+}
+
 function check_jam($jam, $status, $raw = false)
 {
     if ($jam) {
@@ -62,6 +109,8 @@ function check_jam($jam, $status, $raw = false)
         return 'Tidak Hadir';
     }
 }
+
+
 
 function is_weekend($tgl = false)
 {

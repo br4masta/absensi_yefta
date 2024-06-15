@@ -32,14 +32,14 @@ class Absensi extends CI_Controller
     public function detail_absensi()
     {
         $data = $this->detail_data_absen();
-        return $this->template->load('template', 'absensi/detail', $data);
+        return $this->template->load('template', 'absensi/detailNew', $data);
     }
 
     public function check_absen()
     {
         $now = date('H:i:s');
         $data['absen'] = $this->absensi->absen_harian_user($this->session->id_user)->num_rows();
-        return $this->template->load('template', 'absensi/absen', $data);
+        return $this->template->load('template', 'absensi/absenNew', $data);
     }
 
     public function absen()
