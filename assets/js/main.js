@@ -137,6 +137,10 @@ $(document).ready(function () {
         $('#modal-edit-divisi').modal('hide');
     });
 
+    $('.btn-masuk-keluar').click(function () {
+        window.location.href = $(this).data('href')
+    });
+
     $('body').on('click', '.btn-delete', function () {
         let destionation = $(this).attr('href');
 

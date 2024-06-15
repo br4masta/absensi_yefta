@@ -59,7 +59,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-4">
                                 <div class="form-group">
                                     <label for="divisi">Divisi : </label>
-                                    <select name="divisi" id="divisi" value="<?= $user->divisi ?>" class="form-control">
+                                    <select name="divisi" id="divisi" value="<?= $user->divisi ?>" class="form-control" disabled>
                                         <option value="" disabled selected>-- Pilih Divisi --</option>
                                         <?php foreach($divisi as $d): ?>
                                             <option value="<?= $d->id_divisi ?>" <?= ($d->id_divisi == $user->divisi) ? 'selected' : '' ?>><?= $d->nama_divisi ?></option>

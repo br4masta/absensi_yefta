@@ -60,6 +60,9 @@ class Karyawan extends CI_Controller
     {
         $id_user = $this->uri->segment(3);
         $data['karyawan'] = $this->karyawan->find($id_user);
+        
+        $divisi =  $this->load->model('Divisi_model', 'divisi');
+        $data['divisi'] = $this->divisi->get_all();
         return $this->template->load('template', 'karyawan/edit', $data);
     }
 

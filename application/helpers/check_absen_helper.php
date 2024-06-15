@@ -16,13 +16,46 @@ function check_absen_harian()
     }
 }
 
-function check_jamNew($jam, $status, $raw = false)
+function check_jamNew($jam, $status, $raw = false, $id, $lat, $long, $user_name, $absensi)
 {
     if ($jam) {
         $status = ucfirst($status);
         $CI =& get_instance();
         $CI->load->model('Jam_model', 'jam');
         $jam_kerja = $CI->jam->db->where('keterangan', $status)->get('jam')->row();
+        $CI->load->model('Absensi_model', 'absensi');
+        $fileUrlObject = $CI->absensi->get_file_path($id);
+
+        $fileUrl = '';
+        if ($fileUrlObject && isset($fileUrlObject->file_path)) {
+            $fileUrl = $fileUrlObject->file_path;
+        }
+        // var_dump($absensi['jenis_pulang']);
+        // die();
+
+        
+        if($status=='Masuk'){
+            $jenis = $absensi['jenis'];
+        }else{
+            $jenis = $absensi['jenis_pulang'];
+        }
+        if($jenis!=0){
+            if ($jenis==1) {
+                $text='Izin';
+            }elseif($jenis==2){
+                $text='Sakit';
+            }elseif($jenis==3){
+                $text='Cuti';
+            }
+            if ($raw) {
+                return [
+                    'status' => 'telat',
+                    'text' => $text
+                ];
+            } else {
+                return '<span data-username="'.$user_name.'" data-lat="'.$lat.'" data-long="'.$long.'" data-file="' . htmlspecialchars($fileUrl, ENT_QUOTES, 'UTF-8') . '" class="badge badge-warning">' . $text . '</span>';
+            }
+        }
 
         if ($status == 'Masuk' && $jam > $jam_kerja->finish) {
             if ($raw) {
@@ -31,7 +64,7 @@ function check_jamNew($jam, $status, $raw = false)
                     'text' => $jam
                 ];
             } else {
-                return '<span class="badge badge-danger">' . $jam . '</span>';
+                return '<span data-username="'.$user_name.'" data-lat="'.$lat.'" data-long="'.$long.'" data-file="' . htmlspecialchars($fileUrl, ENT_QUOTES, 'UTF-8') . '" class="badge show_gambar badge-danger">' . $jam . '</span>';
             }
         } elseif ($status == 'Pulang' && $jam > $jam_kerja->finish) {
             if ($raw) {
@@ -40,7 +73,7 @@ function check_jamNew($jam, $status, $raw = false)
                     'text' => $jam
                 ];
             } else {
-                return '<span class="badge badge-success">' . $jam . '</span>';
+                return '<span data-username="'.$user_name.'" data-lat="'.$lat.'" data-long="'.$long.'" data-file="' . htmlspecialchars($fileUrl, ENT_QUOTES, 'UTF-8') . '" class="badge show_gambar badge-success">' . $jam . '</span>';
             }
         } else {
             if ($raw) {
@@ -49,7 +82,7 @@ function check_jamNew($jam, $status, $raw = false)
                     'text' => $jam
                 ];
             } else {
-                return '<span class="badge badge-primary">' . $jam . '</span>';
+                return '<span data-username="'.$user_name.'" data-lat="'.$lat.'" data-long="'.$long.'" data-file="' . htmlspecialchars($fileUrl, ENT_QUOTES, 'UTF-8') . '" class="badge show_gambar badge-primary">' . $jam . '</span>';
             }
         }
     } else {

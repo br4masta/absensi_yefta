@@ -14,6 +14,8 @@ class User extends CI_Controller
     {
         $id_user = $this->session->id_user;
         $data['user'] = $this->user->find_by('id_user', $id_user, true);
+        $divisi =  $this->load->model('Divisi_model', 'divisi');
+        $data['divisi'] = $this->divisi->get_all();
         return $this->template->load('template', 'edit_profil', $data);
     }
 

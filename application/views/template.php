@@ -148,6 +148,9 @@
     </div>
 </body>
 
+<!-- tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
 <!--   Core JS Files   -->
 <script src="<?= base_url('assets/js/core/jquery.min.js') ?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/js/core/popper.min.js') ?>" type="text/javascript"></script>

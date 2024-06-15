@@ -39,7 +39,64 @@ class Absensi extends CI_Controller
     {
         $now = date('H:i:s');
         $data['absen'] = $this->absensi->absen_harian_user($this->session->id_user)->num_rows();
+        // var_dump($data['absen']);
+        // die;
         return $this->template->load('template', 'absensi/absenNew', $data);
+    }
+
+    public function save_image(){
+        if(isset($_POST['image']) && isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['keterangan']) && isset($_POST['jenis'])) {
+            $file='';
+            if($_POST['jenis']==0){
+                $data = $_POST['image'];
+                
+            
+                $image_parts = explode(";base64,", $data);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $file_name = 'snapshot_' . uniqid() . '.png';
+                $file = 'uploads/' . $file_name;
+            
+                if (!file_exists('uploads')) {
+                    mkdir('uploads', 0777, true);
+                }
+            
+                file_put_contents($file, $image_base64);
+            }
+            
+
+            //save absen
+            if ($_POST['keterangan']) {
+                $keterangan = ucfirst($_POST['keterangan']);
+            } else {
+                $absen_harian = $this->absensi->absen_harian_user($this->session->id_user)->num_rows();
+                $keterangan = ($absen_harian < 2 && $absen_harian < 1) ? 'Masuk' : 'Pulang';
+            }
+    
+            $latitude = $_POST['latitude'];
+            $longitude = $_POST['longitude'];
+            $data = [
+                'tgl' => date('Y-m-d'),
+                'waktu' => date('H:i:s'),
+                'keterangan' => $keterangan,
+                'id_user' => $this->session->id_user,
+                'file_path'=>$file,
+                'latitude'=>$latitude,
+                'longitude'=>$longitude,
+                'capture_time'=>date('Y-m-d H:i:s'),
+                'jenis'=>$_POST['jenis'],
+            ];
+            $result = $this->absensi->insert_data($data);
+        
+            if ($result) {
+                echo json_encode(["file" => $file, "status" => "success"]);
+            } else {
+                echo json_encode(["error" => "Error: " . $sql . "<br>" . $conn->error]);
+            }
+        } else {
+            echo json_encode(["error" => "No image data or location data"]);
+        }
     }
 
     public function absen()
@@ -50,6 +107,7 @@ class Absensi extends CI_Controller
             $absen_harian = $this->absensi->absen_harian_user($this->session->id_user)->num_rows();
             $keterangan = ($absen_harian < 2 && $absen_harian < 1) ? 'Masuk' : 'Pulang';
         }
+
 
         $data = [
             'tgl' => date('Y-m-d'),
