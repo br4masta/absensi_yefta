@@ -23,6 +23,18 @@
     <?php check_absen_harian() ?>
 </head>
 
+<style>
+   
+    .modal-backdrop {
+        z-index: 1040; /* Default backdrop z-index */
+    }
+
+    .modal {
+        z-index: 1050; /* Default modal z-index */
+    }
+
+</style>
+
 <body>
     <div class="wrapper">
         <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="blue">
