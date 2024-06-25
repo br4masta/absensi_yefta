@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR die('No direct script access allowed!');
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Absensi extends CI_Controller
 {
@@ -12,6 +14,7 @@ class Absensi extends CI_Controller
         $this->load->model('Karyawan_model', 'karyawan');
         $this->load->model('Jam_model', 'jam');
         $this->load->helper('Tanggal');
+        require 'vendor/autoload.php';
     }
 
     public function index()
@@ -134,13 +137,32 @@ class Absensi extends CI_Controller
     {
         $this->load->library('pdf');
         $data = $this->detail_data_absen();
+        
         $html_content = $this->load->view('absensi/print_pdf', $data, true);
         $filename = 'Absensi ' . $data['karyawan']->nama . ' - ' . bulan($data['bulan']) . ' ' . $data['tahun'] . '.pdf';
 
+        // Memuat HTML ke Dompdf
         $this->pdf->loadHtml($html_content);
+        // var_dump($html_content);
+        // die();
+        // Instansiasi objek Options
+        // $options = new Options();
+        // $options->set('isPhpEnabled', true); // Opsional, jika Anda perlu PHP dalam dokumen HTML
+        // $options->set('isHtml5ParserEnabled', true); // Opsional, tergantung pada konten HTML Anda
+        // $options->set('zoom', '0.7'); // Set zoom ke 70%
+        
+        // // Terapkan opsi pada objek Dompdf
+        // $this->pdf->setOptions($options);
+        
+        // Merender PDF
         $this->pdf->render();
+        
+        // Stream PDF ke browser dengan nama file
         $this->pdf->stream($filename, ['Attachment' => 1]);
     }
+
+    
+    
 
     public function export_excel()
     {

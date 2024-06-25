@@ -19,10 +19,12 @@
         }
     ],
     "autoload": {
-        "psr-4" : {
-            "Dompdf\\" : "src/"
+        "psr-4": {
+            "Dompdf\\": "src/"
         },
-        "classmap" : ["lib/"]
+        "classmap": [
+            "lib/"
+        ]
     },
     "require": {
         "php": ">=5.4.0",
