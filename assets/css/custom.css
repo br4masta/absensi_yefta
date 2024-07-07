@@ -1,0 +1,16 @@
+.modal-body{
+    padding-top:10px !important;
+    padding-bottom:10px !important;
+}
+.modal.show .modal-dialog{
+    -webkit-transform:unset !important;
+    transform:unset !important;
+}
+
+.modal .form-group{
+    margin:0px !important;
+}
+
+@media (max-width:991px){
+    .modal-backdrop{display: none;}
+}

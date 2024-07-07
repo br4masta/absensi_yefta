@@ -2,12 +2,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<style>
-    .modal.show .modal-dialog{
-        -webkit-transform:unset !important;
-        transform:unset !important;
-    }
-</style>
 
 <div class="row">
     <div class="col-12">
@@ -41,7 +35,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-capture" tabindex="-1" role="dialog" aria-labelledby="modal-add-divisi-label" aria-hidden="true">
+<div class="modal fade" id="modal-capture" tabindex="-1" role="dialog" aria-labelledby="modal-add-divisi-label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
     <div class="modal-dialog h-100 mt-0 d-flex align-items-center" role="document">
         <div class="modal-content">
             <form id="form-add-divisi" action="<?= base_url('divisi/store') ?>" method="post" onsubmit="return false">
@@ -62,7 +56,7 @@
                         <label for="Jenis">Jenis : </label>
                         <select name="Jenis" id="Jenis"  class="form-control">
                             <option value="" disabled >-- Pilih Jenis --</option>
-                            <option value="0"  selected>-</option>
+                            <option value="0"  selected>Absen</option>
                             <option value="1" >Izin</option>
                             <option value="2" >Sakit</option>
                             <option value="2" >Cuti</option>
@@ -93,9 +87,9 @@
 
     $(document).on("change","#Jenis",function() {
         if($(this).val()!=0){
-            $('#my_camera').addClass('d-none')
+            $('#my_camera').parent('.form-group').addClass('d-none')
         }else{
-            $('#my_camera').removeClass('d-none')
+            $('#my_camera').parent('.form-group').removeClass('d-none')
         }
             
         
