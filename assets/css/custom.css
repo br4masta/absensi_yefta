@@ -1,3 +1,7 @@
+/* modal */
+.modal{
+    zoom: 85%;
+}
 .modal-body{
     padding-top:10px !important;
     padding-bottom:10px !important;
@@ -11,6 +15,14 @@
     margin:0px !important;
 }
 
+
+/* swall alert */
+.swal2-popup{
+    zoom: 75%;
+}
+
+/* responsive */
 @media (max-width:991px){
+    /* modal */
     .modal-backdrop{display: none;}
 }
