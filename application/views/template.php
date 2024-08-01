@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    <title>Absensi Indoexpress</title>
+    <title>Absensi PT Karya Satria Advertising</title>
 
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -39,7 +39,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg" data-color="blue">
+        <div class="sidebar" data-color="blue">
             <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -48,7 +48,7 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="<?= base_url() ?>" class="simple-text">
-                        <img src="<?= base_url('assets/img/logo-indoexpress.png') ?>" alt="" class="img-fluid">
+                        <img src="<?= base_url('assets/img/karya-satria.png') ?>" alt="" class="img-fluid">
                     </a>
                 </div>
                 <ul class="nav">
@@ -71,10 +71,10 @@
                     </li>
                     <?php if(is_level('Manager')): ?>
                         <li class="nav-item <?= @$_active ?>">
-                            <a class="nav-link" href="<?= base_url('jam') ?>">
+                            <!-- <a class="nav-link" href="<?= base_url('jam') ?>">
                                 <i class="nc-icon nc-time-alarm"></i>
                                 <p>Jam Kerja</p>
-                            </a>
+                            </a> -->
                         </li>
                         <li class="nav-item <?= @$_active ?>">
                             <a class="nav-link" href="<?= base_url('divisi') ?>">
@@ -94,6 +94,12 @@
                                 <p>Absensi</p>
                             </a>
                         </li>
+                        <li class="nav-item <?= @$_active ?>">
+                            <a class="nav-link" href="<?= base_url('absensi') ?>">
+                                <i class="nc-icon nc-notes"></i>
+                                <p>Lembur Karyawan</p>
+                            </a>
+                        </li>
                     <?php else: ?>
                         <li class="nav-item <?= @$_active ?>">
                             <a class="nav-link" href="<?= base_url('absensi/check_absen') ?>">
@@ -110,6 +116,12 @@
                             <a class="nav-link" href="<?= base_url('absensi/detail_absensi') ?>">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Absensi Ku</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?= @$_active ?>">
+                            <a class="nav-link" href="<?= base_url('absensi/detail_absensi') ?>">
+                                <i class="nc-icon nc-notes"></i>
+                                <p>Lembur</p>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -153,7 +165,7 @@
                 <div class="container">
                     <nav>
                         <p class="copyright text-center">
-                            &copy; 2019 <a href="http://indoexpress.co.id">Indoexpress</a>
+                            &copy; 2024 <a href="http://karyasatria.com">PT Karya Satria Advertising Cabang Surabaya</a>
                         </p>
                     </nav>
                 </div>
@@ -163,7 +175,7 @@
 </body>
 
 <!-- tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
 <!--   Core JS Files   -->
 <script src="<?= base_url('assets/js/core/jquery.min.js') ?>" type="text/javascript"></script>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Absen Indoexpress | Login</title>
+    <title>Absen PT Karya Satria Advertising Cabang Surabaya | Login</title>
 
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendor/font-awesome/css/font-awesome.min.css') ?>">
@@ -17,7 +17,7 @@
                     <section id="login-body" class="pt-3">
                         <div class="card border-0 shadow pt-3">
                             <div class="card-header bg-transparent border-bottom-0 pb-0 text-center">
-                                <img src="<?= base_url('assets/img/logo-indoexpress.png') ?>" alt="Logo Indoexpress" class="img-fluid mx-auto d-block">
+                                <img src="<?= base_url('assets/img/karya-satria.png') ?>" alt="Logo Karya Satria Advertising" class="img-fluid mx-auto d-block">
                                 <div class="mt-3">
                                     <span class="card-info text-center">Masuk untuk melakukan absensi</span>
                                 </div>
