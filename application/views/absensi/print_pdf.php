@@ -6,16 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Absen <?= $karyawan->nama ?> bulan <?= bulan($bulan) . ', ' . $tahun ?></title>
 
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
+    <!-- Ganti link ke Bootstrap dengan CSS inline sederhana -->
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 5px; text-align: left; }
+        .bg-dark { background-color: #343a40; color: white; }
+        .bg-danger { background-color: #dc3545; color: white; }
+    </style>
 </head>
 <body>
-    <div class="container">
-    <div class="row mt-2" >
-        <div class="mt-2 col-12">
+    <div class="row mt-2">
+        <div class="mt-2">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header d-flex" style="height:100px;">
+                        <div class="card-header d-flex">
                             <div class="float-left">
                                 <table class="table">
                                     <tr>
@@ -43,25 +49,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php if($absen): ?>
-                            <?php foreach($hari as $i => $h): ?>
-                                <?php
-                                    $absen_harian = array_search($h['tgl'], array_column($absen, 'tgl')) !== false ? $absen[array_search($h['tgl'], array_column($absen, 'tgl'))] : '';
-                                    // var_dump($absen_harian);
-                                ?>
-                                <tr>
-                                    <td><?= ($i+1) ?></td>
-                                    <td><?= $h['hari'] . ', ' . $h['tgl'] ?></td>
-                                    <td><?= check_jamNew(@$absen_harian['jam_masuk'], 'Masuk',false,@$absen_harian['id_absen'],@$absen_harian['latitude_masuk'],@$absen_harian['longitude_masuk'],@$absen_harian['user_name'],$absen_harian) ?></td>
-                                    <td><?= check_jamNew(@$absen_harian['jam_pulang'], 'Pulang',false,@$absen_harian['id_absen_pulang'],@$absen_harian['latitude_pulang'],@$absen_harian['longitude_pulang'],@$absen_harian['user_name'],$absen_harian) ?></td>
-                                    
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td class="bg-light" colspan="4">Tidak ada data absen</td>
-                            </tr>
-                        <?php endif; ?>
+                                <?php foreach($hari as $i => $h): ?>
+                                    <?php
+                                        $absen_harian = array_search($h['tgl'], array_column($absen, 'tgl')) !== false ? $absen[array_search($h['tgl'], array_column($absen, 'tgl'))] : '';
+                                    ?>
+                                    <tr <?= (in_array($h['hari'], ['Sabtu', 'Minggu'])) ? 'class="bg-dark text-white"' : '' ?> <?= ($absen_harian == '') ? 'class="bg-danger text-white"' : '' ?>>
+                                        <td><?= ($i+1) ?></td>
+                                        <td><?= $h['hari'] . ', ' . $h['tgl'] ?></td>
+                                        <td><?= (in_array($h['hari'], ['Sabtu', 'Minggu'])) ? 'Libur Akhir Pekan' : check_jam(@$absen_harian['jam_masuk'], 'masuk') ?></td>
+                                        <td><?= (in_array($h['hari'], ['Sabtu', 'Minggu'])) ? 'Libur Akhir Pekan' : check_jam(@$absen_harian['jam_pulang'], 'pulang') ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -70,7 +68,5 @@
             </div>
         </div>
     </div>
-    </div>
-    
 </body>
 </html>

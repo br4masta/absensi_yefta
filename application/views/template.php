@@ -94,12 +94,6 @@
                                 <p>Absensi</p>
                             </a>
                         </li>
-                        <li class="nav-item <?= @$_active ?>">
-                            <a class="nav-link" href="<?= base_url('absensi') ?>">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Lembur Karyawan</p>
-                            </a>
-                        </li>
                     <?php else: ?>
                         <li class="nav-item <?= @$_active ?>">
                             <a class="nav-link" href="<?= base_url('absensi/check_absen') ?>">
@@ -117,13 +111,7 @@
                                 <i class="nc-icon nc-notes"></i>
                                 <p>Absensi Ku</p>
                             </a>
-                        </li>
-                        <li class="nav-item <?= @$_active ?>">
-                            <a class="nav-link" href="<?= base_url('absensi/detail_absensi') ?>">
-                                <i class="nc-icon nc-notes"></i>
-                                <p>Lembur</p>
-                            </a>
-                        </li>
+                        </li>                        
                     <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('dashboard/logout') ?>">
